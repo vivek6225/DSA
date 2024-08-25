@@ -90,7 +90,11 @@ int main()
   q.push(7);
   q.push(54);
   q.push(2);
-  // q.pop();
   q.pop();
- cout<<q.start()<<endl;
+  q.pop();
+   q.pop();
+
+ int x = q.start();
+ if(!q.IsEmpty())
+ cout<<x<<" ";
 }
