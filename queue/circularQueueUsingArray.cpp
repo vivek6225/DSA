@@ -22,7 +22,7 @@ class Queue {
   //queue is full or not
   bool IsFull()
   {
-  return rear == size-1;
+  return (rear+1)%size==front;
   }
   // push element into queue,  end
   void push(int x)
@@ -44,7 +44,7 @@ class Queue {
    //INSERT
  else{
   cout<<" pushed "<<x<<" into the queue\n ";
-  rear = rear+1;
+  rear = (rear+1)%size;
   arr[rear]=x;
  }
   }
@@ -67,7 +67,7 @@ class Queue {
        front=rear=-1;
   }
   else{
-    front = front+1;
+    front = (front+1)%size;
       cout<<" poped "<<arr[front]<<" into the queue\n ";
   }
     }
@@ -89,12 +89,13 @@ int main()
   Queue q(5);
   q.push(7);
   q.push(54);
+   q.push(64);
+   q.push(74);
+   q.pop();
   q.push(2);
-  q.pop();
+    q.push(4);
   q.pop();
    q.pop();
 
- int x = q.start();
- if(!q.IsEmpty())
- cout<<x<<" ";
+ 
 }

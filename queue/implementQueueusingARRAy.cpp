@@ -89,9 +89,10 @@ int main()
   Queue q(5);
   q.push(7);
   q.push(54);
+   q.pop();
   q.push(2);
   q.pop();
-  q.pop();
+ 
    q.pop();
 
  int x = q.start();
