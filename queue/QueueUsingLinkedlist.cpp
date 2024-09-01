@@ -31,10 +31,11 @@ class Queue
   void push(int x)
   {
     //empty
-    cout<<" pushed "<<x<<"into the queue\n";
+    cout<<" pushed "<<x<<" into the queue\n ";
    if(IsEmpty())
     {
     front = rear = new Node(x);
+    return;
 
     }
     // empty na ho
@@ -61,7 +62,7 @@ class Queue
         return;
        }
        else{
-           //cout<<" poped "<<front->data<<" from the queue\n ";
+           cout<<" poped "<<front->data<<" from the queue\n ";
            Node*temp =  front;
            front = front->next;
            delete temp;
@@ -88,4 +89,5 @@ q.push(23);
 q.push(25);
 q.push(26);
 q.push(20);
+q.pop(25);
 }
