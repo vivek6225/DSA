@@ -14,6 +14,8 @@ public:
                 start = mid+1;
 
             }
+            // left
+            
             else{
                 end = mid-1;
             }
