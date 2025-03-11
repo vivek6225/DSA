@@ -1,6 +1,10 @@
 class Solution {
   public:
       string reverseWords(string s) {
+        
+        // T.C = 0(n);
+        //S.C = 0(1);
+        
           int n = s.size();
           string ans = "";
           reverse(s.begin(),s.end());
