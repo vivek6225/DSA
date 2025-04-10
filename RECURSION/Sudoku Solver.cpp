@@ -61,5 +61,5 @@ class Solution {
           helper(board,0,0);
           
       }
-      
+
   };
