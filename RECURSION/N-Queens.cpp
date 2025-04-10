@@ -50,4 +50,5 @@ class Solution {
       nQueens(board,0,n, ans);
       return ans;              
       }
+      
   };
