@@ -1,3 +1,9 @@
+// 1.Include current element once: indx + 1
+// 2.Include current element again: indx
+// 3.Skip current element: indx + 1
+// 4. Use set<vector<int>> to avoid duplicates.
+//After including an element, always pop_back() to undo the choice.
+
 class Solution {
   public:
   set<vector<int>> s;
@@ -27,5 +33,5 @@ class Solution {
      return ans;
           
       }
-      
+
   };
