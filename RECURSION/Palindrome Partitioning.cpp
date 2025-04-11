@@ -5,10 +5,6 @@
 // Backtrack after recursion.
 // Backtracking used to explore all valid splits.
 // Result stored in ans.
-
-
-
-
 class Solution {
   public:
   bool ispalin(string s){
