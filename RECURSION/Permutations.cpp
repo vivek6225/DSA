@@ -1,5 +1,5 @@
-// t.c = 0(n!*n)
- // s.s = 0(n!)
+// T.C = 0(n!*n)
+ // S.C = 0(n!)
 
  class Solution {
     public:
