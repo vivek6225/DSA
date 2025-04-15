@@ -1,3 +1,6 @@
+//use[arr[i] + 10] checks if the current number has already been used at this level.
+//FIND INDX = whatever numberit is,add 10 to it.   2+10=12(index)
+
 class Solution {
   public:
   void permut(vector<int>&arr,vector<vector<int>>&ans,int index){
