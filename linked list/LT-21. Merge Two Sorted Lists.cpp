@@ -13,7 +13,7 @@ public:
   // T.C = 0(n+m)
 
     ListNode* mergeTwoLists(ListNode* head1, ListNode* head2) {
-        if(head1 == NULL || head2 == NULL ){
+        if(head1 == NULL || head2 == NULL ){   // BASE CASE
             return head1 == NULL ? head2 : head1;
         }
         if(head1->val <= head2->val){
