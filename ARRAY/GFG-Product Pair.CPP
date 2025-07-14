@@ -1,5 +1,5 @@
 // User function template for C++
-// T.C == 0(N)
+// T.C == 0(n log n)
 //S.C = 0(N)
 
       //NOTES
