@@ -1,3 +1,6 @@
+T.C=0(N)
+S.C=0(N)
+
 #include<bits/stdc++.h>
 using namespace std;
 class Solution {
