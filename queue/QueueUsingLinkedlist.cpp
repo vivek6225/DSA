@@ -5,7 +5,7 @@ class Node
   public:
   int data;
   Node*next;
-  Node(int value)
+  Node(int value) // constructor
   {
     data = value;
     next =  NULL;
@@ -89,5 +89,6 @@ q.push(23);
 q.push(25);
 q.push(26);
 q.push(20);
-q.pop(25);
+q.pop();
+q.pop();
 }
