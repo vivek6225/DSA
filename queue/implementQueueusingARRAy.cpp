@@ -32,7 +32,7 @@ class Queue {
   {
     cout<<" pushed "<<x<< " into the queue\n ";
     front=rear=0;
-    arr[0];
+    arr[0] ;
     return;
   }
   //FULL
