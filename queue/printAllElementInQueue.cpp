@@ -1,4 +1,4 @@
-//s.c =0(1)
+//s.c =0(n)
 //t.c = 0(n)
 
 #include<bits/stdc++.h>
@@ -23,12 +23,10 @@ int main(){
 }
 
 
-
-
 ///////////////////////////////////////////////////////////////////////////////
                  //s.c 0(n)
                  //t,c= 0(n)
-                 // brute force
+                 
 // #include<bits/stdc++.h>
 // using namespace std;
 // int main(){
