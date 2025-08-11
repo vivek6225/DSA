@@ -7,8 +7,9 @@
 
 class Solution {
   public:
-           //Boundary check for k (must be valid).
+          
     queue<int> reverseFirstK(queue<int> q, int k) {
+         //Boundary check for k (must be valid).
         if (k <= 0 || k > q.size()) return q;
         
         stack<int> st;
