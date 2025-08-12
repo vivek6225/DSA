@@ -1,3 +1,6 @@
+// T.C: O(n × m)
+// S.C: O(n)
+
 class Solution {
 public:
     int timeRequiredToBuy(vector<int>& tickets, int k) {
