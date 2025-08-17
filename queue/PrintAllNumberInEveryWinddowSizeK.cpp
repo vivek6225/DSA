@@ -19,7 +19,7 @@ int main(){
       q.push(arr[i]);
       display(q);
       q.pop();
-     
+    
     }
     return 0;
 }
