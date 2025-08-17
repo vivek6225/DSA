@@ -1,3 +1,6 @@
+// T.C = 0(n)
+// S.C = 0(n)
+
 class Solution {
 public:
     int firstUniqChar(string s) {
