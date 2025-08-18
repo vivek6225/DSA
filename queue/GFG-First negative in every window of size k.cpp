@@ -1,3 +1,44 @@
+       // Optimal Approach
+       // T.C =0(n)
+       // s.C =0(k)
+       class Solution {
+public:
+    vector<int> firstNegInt(vector<int>& arr, int k) {
+        queue<int> q;
+        vector<int> ans;
+        int n = arr.size();
+
+        // k-1 elements hai, push kar do agar negative hai
+        for (int i = 0; i < k - 1; i++) {
+            if (arr[i] < 0)
+                q.push(i);
+        }
+
+        // ab window process karo
+        for (int i = k - 1; i < n; i++) {
+            if (arr[i] < 0)
+                q.push(i);
+
+          // agar queue ka front window ke bahar hai, to pop karo
+            if (!q.empty() && q.front() <= i - k)
+                q.pop();
+
+      // agar queue empty hai to 0 push karo, otherwise first negative
+            if (q.empty())
+                ans.push_back(0);
+            else
+                ans.push_back(arr[q.front()]);
+        }
+
+        return ans;  
+    }
+};
+
+
+
+
+
+//---------------------------------------------------------------
 //Better Approach
 // T.C = 0(n*k)
 // S.C = 0(k)
