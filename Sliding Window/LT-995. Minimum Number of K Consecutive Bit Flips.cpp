@@ -1,4 +1,32 @@
-             
+
+                   // Optimal Approach
+  //T.C = 0(n)
+    //S.C = 0(n)
+    class Solution {
+public:
+    int minKBitFlips(vector<int>& nums, int k) {
+        queue<int> q; 
+        int flip = 0;
+        int n = nums.size();
+
+        for (int i = 0; i < n; i++) {
+      // remove expired flips (jo window ke bahar chale gaye)
+            if (!q.empty() && q.front() < i)
+                q.pop();
+
+  // ab check karo: agar flips ka parity == nums[i]
+    // iska matlab element abhi effectively '0' hai → flip karna hoga
+            if (q.size() % 2 == nums[i]) {
+                if (i + k - 1 >= n)  // agar window bahar ja rahi hai
+                    return -1;
+                q.push(i + k - 1);   // mark ki flip yaha tak chalega
+                flip++;
+            }
+        }
+        return flip;
+    }
+};
+ //--------------------------------------------------------------------------    
              //  Brute Force Approach
     //T.C: O(n * k)
       //S.C: O(1)
@@ -31,7 +59,7 @@ public:
                 
    // Check if flipping is possible (window of size k fits inside array)
                 if (i + k - 1 >= n)
-                    return -1;    // Not enough space → impossible to flip all to 1
+              return -1;    // Not enough space → impossible to flip all to -1
 
        // Flip k consecutive elements starting from i
                 for (int j = i; j <= i + k - 1; j++) {
@@ -43,33 +71,5 @@ public:
         }
 
         return flip; // return the minimum number of flips required
-    }
-};
-//----------------------------------------------------------------------
-         // Optimal Approach
-  //T.C = 0(n)
-    //S.C = 0(n)
-    class Solution {
-public:
-    int minKBitFlips(vector<int>& nums, int k) {
-        queue<int> q; 
-        int flip = 0;
-        int n = nums.size();
-
-        for (int i = 0; i < n; i++) {
-      // remove expired flips (jo window ke bahar chale gaye)
-            if (!q.empty() && q.front() < i)
-                q.pop();
-
-  // ab check karo: agar flips ka parity == nums[i]
-    // iska matlab element abhi effectively '0' hai → flip karna hoga
-            if (q.size() % 2 == nums[i]) {
-                if (i + k - 1 >= n)  // agar window bahar ja rahi hai
-                    return -1;
-                q.push(i + k - 1);   // mark ki flip yaha tak chalega
-                flip++;
-            }
-        }
-        return flip;
     }
 };
