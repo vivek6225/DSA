@@ -8,8 +8,6 @@ void print(int n){
     }
     cout<<n<<endl;
     print(n-2);
-
-
 }
 
 int main()
