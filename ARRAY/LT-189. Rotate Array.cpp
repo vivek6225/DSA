@@ -1,4 +1,5 @@
-              //Optimal Approach
+
+//-----------------------Optimal Approach-------------------------------------
               // S.C= 0(N)
               // T.C= 0(1)
     class Solution {
@@ -18,13 +19,12 @@ public:
     }
 };  
             
-//-----------------------------------------------------------------------------------------
-                       // Brute Force Approach
-              // T.C = O(N)
-              // S.C = O(N)
+//------------Brute Force Approach---------------------------------------------
+                     
+   // T.C = O(N)
+  // S.C = O(N)
            class Solution {
            public:
-    
     void rotate(vector<int>& nums, int k) {
         int n = nums.size();
         k = k % n; // handle k > n
