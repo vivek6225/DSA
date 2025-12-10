@@ -1,29 +1,40 @@
 
+
+
+// ---------------------Using RECURSION-----------------------------------
 //T.C = 0(N)
 //S.c = 0(N)
 
 class Solution {
 public:
-    // Helper function for inorder traversal (Left -> Node -> Right)
-    void inOrd(Node* root, vector<int>& ans) {
-        // Base condition
-        if (root == NULL)
+
+    // Helper function for inorder traversal
+    // Inorder = Left → Node → Right
+    void inord(TreeNode* root, vector<int>& ans) {
+
+        // Base case: NULL node
+        if(!root)
             return;
 
-        // Step 1: Traverse left subtree
-        inOrd(root->left, ans);
+        // 1. Traverse LEFT subtree
+        inord(root->left, ans);
 
-        // Step 2: Visit current node
-        ans.push_back(root->data);
+        // 2. Visit ROOT node
+        ans.push_back(root->val);
 
-        // Step 3: Traverse right subtree
-        inOrd(root->right, ans);
+        // 3. Traverse RIGHT subtree
+        inord(root->right, ans);
     }
 
-    // Main function to return inorder traversal
-    vector<int> inOrder(Node* root) {
-        vector<int> ans;        // Vector to store traversal result
-        inOrd(root, ans);       // Call helper function
-        return ans;             // Return the final inorder list
+    // Main function to get inorder traversal
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> ans;
+
+        // call recursive helper
+        inord(root, ans);
+
+        return ans;
     }
 };
+
+
