@@ -1,4 +1,7 @@
 
+
+// T.C = 0(N)
+//S.C = 0(N)
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
@@ -33,7 +36,7 @@ public:
 };
 
 
-//---------------------------using RECURSION------------------------------
+//---------------------------using RECURSION------------------------------------
 //T.C = 0(N)
 //S.c = 0(N)
 
@@ -54,5 +57,46 @@ void pre (TreeNode*root,vector<int>&ans){
         pre(root,ans);
         return ans;
         
+    }
+};
+//---------------------------  using Morris  ------------------------------------
+// T.C = 0(N)
+//S.C = 0(1)
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+
+        vector<int> ans;
+
+        while (root) {
+
+            // Case 1: No left child
+            // Visit node and move right
+            if (!root->left) {
+                ans.push_back(root->val);
+                root = root->right;
+            }
+            else {
+                // Find inorder predecessor
+                TreeNode* curr = root->left;
+
+                while (curr->right && curr->right != root)
+                    curr = curr->right;
+
+                // Case 2: First time at this node
+                if (curr->right == NULL) {
+                    ans.push_back(root->val); // Preorder: visit BEFORE left
+                    curr->right = root;       // Create thread
+                    root = root->left;        // Move left
+                }
+                // Case 3: Thread already exists
+                else {
+                    curr->right = NULL;       // Remove thread
+                    root = root->right;       // Move right
+                }
+            }
+        }
+
+        return ans;
     }
 };
