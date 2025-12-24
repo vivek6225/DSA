@@ -6,8 +6,7 @@ public:
     vector<int> rightSideView(TreeNode* root) {
 
         vector<int> ans;
-        
-        // Edge case: empty tree
+
         if(!root)
             return ans;
 
@@ -18,21 +17,21 @@ public:
         while(!q.empty()){
 
             // ---- RIGHT VIEW LOGIC ----
-            // Har level ka LAST node right view hota hai
-            ans.push_back(q.front()->val);  
+            // Because we push RIGHT child first,
+            // the FIRST node of each level becomes the right view.
+            ans.push_back(q.front()->val);
 
-            int n = q.size();   // current level ke nodes kitne hain
+            int n = q.size();   // number of nodes in current level
 
-            // current level ke saare nodes process karo
             while(n--){
                 TreeNode* temp = q.front();
                 q.pop();
 
-                // IMPORTANT:
-                // Right view ke liye pehle RIGHT daalo, fir LEFT
+                // Push RIGHT first so that it appears first in next level
                 if(temp->right)
                     q.push(temp->right);
 
+                // Then push LEFT
                 if(temp->left)
                     q.push(temp->left);
             }
@@ -41,6 +40,7 @@ public:
         return ans;
     }
 };
+
 //----------using RECURSION-----------------------------------------------------
 class Solution {
 public:
