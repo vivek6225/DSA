@@ -1,3 +1,7 @@
+
+//T.C = O(N * 2^N)
+//S.C = O(N * 2^N)
+
 #include<bits/stdc++.h>
 using namespace std;
 
