@@ -15,10 +15,10 @@ void Subsequence(int arr[], int index, int n,
         return;
     }
 
-    // 1️⃣ Choice: Do NOT include current element
+    // 1Choice: Do NOT include current element
     Subsequence(arr, index + 1, n, ans, temp);
 
-    // 2️⃣ Choice: Include current element
+    //  Choice: Include current element
     temp.push_back(arr[index]);
     Subsequence(arr, index + 1, n, ans, temp);
 }
