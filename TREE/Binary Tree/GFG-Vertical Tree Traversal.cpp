@@ -1,9 +1,17 @@
+
+// Rule 1: Node with smaller vertical index (column) comes first.
+// Rule 2: If column is same, node with smaller level (closer to root) comes first.
+
+// T.C = 0(N)
+//S.C = 0(N)
+
+
 class Solution {
 public:
-
     // This function finds the minimum (l) and maximum (r)
     // horizontal distance (column index) in the tree.
     // pos = current column index
+    
     void find(Node* root, int pos, int &l, int &r) {
         // Base case: empty node
         if (!root) return;
