@@ -1,6 +1,6 @@
 
-// T.C = 0(N)
-//S.C = 0(H)
+// T.C = O(N)
+//S.C = O(H)
 
 class Solution {
 public:
