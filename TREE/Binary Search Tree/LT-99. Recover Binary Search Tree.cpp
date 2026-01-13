@@ -1,47 +1,5 @@
 
-//T.C = O(N)
-//S.C = O(N)
-class Solution {
-public:
-     TreeNode* prev = NULL;     // previous node in inorder
-     TreeNode* first = NULL;    // first wrong node
-     TreeNode* second = NULL;   // second wrong node
-     
-     // inorder traversal to find wrong nodes
-     void inorder(TreeNode * root){
-        
-        if(!root)
-            return;
-
-        inorder(root->left);
-
-        // if current value is smaller than previous, BST rule broken
-        if(!prev || prev->val > root->val){
-
-            // first time mistake, save previous node
-            if(first == NULL)
-                first = prev;
-
-            // always save current node as second
-            second = root;
-        }
-
-        prev = root;        // move to next node
-        inorder(root->right);
-     }
-
-    void recoverTree(TreeNode* root) {
-        
-        inorder(root);     // find wrong nodes
-
-        // swap values to fix tree
-        int temp = first->val;
-        first->val = second->val;
-        second->val = temp;
-    }
-};
-
-//-------------------------------------------------------------------------------
+//-------------------Optimal Approach------------------------------------------------
 //T.C = O(N)
 //T.C = O(1)
 
@@ -60,7 +18,7 @@ public:
             if(!cur->left) {
 
                 // check BST violation
-                if(!prev || prev->val > cur->val) {
+                if(prev != NULL && prev->val > cur->val) {
                     if(!first) first = prev;
                     second = cur;
                 }
@@ -102,3 +60,47 @@ public:
         second->val = t;
     }
 };
+//-------------------Better Approach---------------------------
+//T.C = O(N)
+//S.C = O(N)
+class Solution {
+public:
+     TreeNode* prev = NULL;     // previous node in inorder
+     TreeNode* first = NULL;    // first wrong node
+     TreeNode* second = NULL;   // second wrong node
+     
+     // inorder traversal to find wrong nodes
+     void inorder(TreeNode * root){
+        
+        if(!root)
+            return;
+
+        inorder(root->left);
+
+        // if current value is smaller than previous, BST rule broken
+        if(prev != NULL && prev->val > root->val){
+
+            // first time mistake, save previous node
+            if(first == NULL)
+                first = prev;
+
+            // always save current node as second
+            second = root;
+        }
+
+        prev = root;        // move to next node
+        inorder(root->right);
+     }
+
+    void recoverTree(TreeNode* root) {
+        
+        inorder(root);     // find wrong nodes
+
+        // swap values to fix tree
+        int temp = first->val;
+        first->val = second->val;
+        second->val = temp;
+    }
+};
+
+
