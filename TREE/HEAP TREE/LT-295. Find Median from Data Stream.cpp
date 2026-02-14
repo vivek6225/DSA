@@ -1,3 +1,6 @@
+//T.C = O(N lon N)
+//S.C = O(N)
+
 class MedianFinder {
 public:
     
