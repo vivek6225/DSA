@@ -4,41 +4,48 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
+
+        int n = nums.size();
         vector<vector<int>> ans;
 
-        // Step 1: Sort the array
+        // Step 1: Sort the array (important for two-pointer + duplicate handling)
         sort(nums.begin(), nums.end());
 
-        // Step 2: Fix first element (i)
-        for(int i = 0; i < nums.size(); i++) {
+        // Step 2: Fix the first element
+        for(int i = 0; i < n; i++){
 
-            // Skip duplicate values of i
+            // Skip duplicate values of i to avoid repeated triplets
             if(i > 0 && nums[i] == nums[i-1]) continue;
 
-            int left = i + 1;                 // second element
-            int right = nums.size() - 1;      // third element
+            // Two pointers for remaining part
+            int j = i + 1;        // left pointer
+            int k = n - 1;        // right pointer
 
-            // Step 3: Two pointer search
-            while(left < right) {
-                int sum = nums[i] + nums[left] + nums[right];
+            // Step 3: Find pairs such that sum = 0
+            while(j < k){
+                int sum = nums[i] + nums[j] + nums[k];
 
-                if(sum == 0) {
-                    ans.push_back({nums[i], nums[left], nums[right]});
-
-                    // Skip duplicates for left
-                    while(left < right && nums[left] == nums[left+1]) left++;
-
-                    // Skip duplicates for right
-                    while(left < right && nums[right] == nums[right-1]) right--;
-
-                    left++;
-                    right--;
+                // If sum is too small → increase it
+                if(sum < 0){
+                    j++;
                 }
-                else if(sum < 0) {
-                    left++;   // need bigger sum
+                // If sum is too large → decrease it
+                else if(sum > 0){
+                    k--;
                 }
-                else {
-                    right--;  // need smaller sum
+                else{
+                    // Found a valid triplet
+                    ans.push_back({nums[i], nums[j], nums[k]});
+
+                    // Move both pointers
+                    j++;
+                    k--;
+
+                    // Skip duplicate values for j (left pointer)
+                    while(j < k && nums[j] == nums[j-1]) j++;
+
+                    // Skip duplicate values for k (right pointer)
+                    while(j < k && nums[k] == nums[k+1]) k--;
                 }
             }
         }
@@ -46,73 +53,56 @@ public:
         return ans;
     }
 };
-//------------------------Better Approach----------------------
+//------------------------Better Approach------------------------
 
 //T.C = O(n² log n)
 // S.C =  O(n²)
 class Solution {
 public:
-
-    // Binary Search function to check if target exists in nums[left...right]
-    bool binarySearch(vector<int>& nums, int left, int right, int target) {
-
-        // Standard binary search loop
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-
-            // If target found
-            if(nums[mid] == target) return true;
-
-            // If target is greater, search right half
-            else if(nums[mid] < target) left = mid + 1;
-
-            // If target is smaller, search left half
-            else right = mid - 1;
-        }
-
-        // Target not found
-        return false;
-    }
-
     vector<vector<int>> threeSum(vector<int>& nums) {
+
         int n = nums.size();
 
-        // Set is used to store only UNIQUE triplets
+        // Set to store unique triplets
         set<vector<int>> st;
 
-        // Sort the array for binary search and duplicate handling
-        sort(nums.begin(), nums.end());
+        // Fix first element
+        for(int i = 0; i < n; i++){
 
-        // Fix the first element
-        for(int i = 0; i < n-2; i++){
+            // Hash set to store elements seen for current i
+            set<int> hash;
 
-            // Fix the second element
-            for(int j = i+1; j < n-1; j++){
+            // Traverse remaining array
+            for(int j = i+1; j < n; j++){
 
-                // Find the third value such that sum = 0
-                // nums[i] + nums[j] + target = 0
-                int target = -(nums[i] + nums[j]);
+                // We want nums[i] + nums[j] + third = 0
+                int third = -(nums[i] + nums[j]);
 
-                // Search for target in remaining part of array
-                if(binarySearch(nums, j+1, n-1, target)){
+                // Check if third element already exists
+                if(hash.find(third) != hash.end()){
 
-                    // Create the triplet
-                    vector<int> temp = {nums[i], nums[j], target};
+                    // Valid triplet found
+                    vector<int> temp = {nums[i], nums[j], third};
 
-                    // Sort triplet to maintain consistent order
-                    // (important for removing duplicates)
+                    // Sort to maintain order (for uniqueness)
                     sort(temp.begin(), temp.end());
 
                     // Insert into set (duplicates automatically removed)
                     st.insert(temp);
                 }
+
+                // Store current element for future checks
+                hash.insert(nums[j]);
             }
         }
 
-        // Convert set to vector and return result
-        return vector<vector<int>>(st.begin(), st.end());
+        // Convert set to vector
+        vector<vector<int>> ans(st.begin(), st.end());
+
+        return ans;
     }
 };
+
 //-------------------Brute Force Approach------------------------------- 
 //T.C = O(n³)
 //S.C = O(n²)
