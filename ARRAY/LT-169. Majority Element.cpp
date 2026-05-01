@@ -1,4 +1,7 @@
       //-------------Optimal Approach---------------------
+    //                Boyer–Moore Voting Algorithm
+    //   Moore’s Voting Algorithm finds the majority element using a candidate and count variable. Different elements cancel each other out, and the majority element survives in the end. It works in O(n) time and O(1) space.
+
       
         // T.C: O(n)
         // S.C: O(1)
@@ -7,41 +10,34 @@ public:
     int majorityElement(vector<int>& nums) {
 
         int n = nums.size();
-        int count = 0;  
-        int ans = 0;    
 
-        // Step 1: Boyer–Moore Voting Algorithm
+        int count = 0;   // stores vote count
+        int ans = 0;     // stores current candidate
+
+        // Boyer–Moore Voting Algorithm
         for (int i = 0; i < n; i++) {
-            // If count is zero, pick the current element as the new candidate
+
+            // if count becomes 0,
+            // choose current element as new candidate
             if (count == 0) {
                 ans = nums[i];
             }
 
-            // If current element matches candidate → increase count
+            // same element -> increase vote count
             if (nums[i] == ans) {
                 count++;
             }
-            // Otherwise → decrease count
+            // different element -> decrease vote count
             else {
                 count--;
             }
         }
 
-        // Step 2: Verify the candidate (optional but safe)
-        // Reset count and check how many times 'ans' actually appears
-        count = 0;
-        for (int val : nums) {
-            if (val == ans)
-                count++;
-        }
-
-        // If frequency of candidate > n/2 → valid majority element
-        if (count > n / 2)
-            return ans;
-        else
-            return -1; // if no majority element exists
+        // remaining candidate is majority element
+        return ans;
     }
 };
+
 
 //-------------Better Approach--------------------------
 
