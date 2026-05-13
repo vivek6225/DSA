@@ -1,37 +1,60 @@
-//              Optimal Approach
+//----------Optimal Approach-------------
 //T.C = 0(n)
 //S.c = 0(n)
-//              Approach
+              //Approach
 // Use a running prefix sum while traversing the array.
 // Keep a hashmap of prefix sum frequencies.
 // If a prefix sum repeats, the subarray(s) between previous occurrence(s) and current index has sum = 0.
 
 class Solution {
 public:
+
     int findSubarray(vector<int> &arr) {
+
         int n = arr.size();
-        int total = 0; // stores total number of subarrays with sum = 0
+
+        // Stores final count of zero sum subarrays
+        int count = 0;
+
+        // Stores running prefix sum
         int prefixSum = 0;
-        
-       // frefixSum,count
-        unordered_map<int,int>m;
-        //initilize 0,1
-        m[0]=1;
-        for(int  i = 0; i<n; i++){
-            prefixSum += arr[i]; // count prefix sum
-            if(m.count (prefixSum)){
-             total +=   m[prefixSum]++; // increment frefix sum
+
+        // Map -> {prefixSum, frequency}
+        unordered_map<int,int> m;
+
+        // Important:
+        // If prefix sum itself becomes 0,
+        // then subarray from 0 to i has sum 0
+        m[0] = 1;
+
+        for(int i = 0; i < n; i++) {
+
+            // Update prefix sum
+            prefixSum += arr[i];
+
+            // If same prefix sum already exists,
+            // then zero sum subarray found
+            if(m.count(prefixSum)) {
+
+                // Add previous frequency
+                count += m[prefixSum];
+
+                // Increase frequency
+                m[prefixSum]++;
             }
-            else{
+            else {
+
+                // First occurrence of prefix sum
                 m[prefixSum] = 1;
             }
         }
-        
-        return total;
+
+        return count;
     }
 };
-//-----------------------------------------------------------------
-//           Better Approach
+        
+       
+//------------------ Better Approach----------
 // T.C= 0(n²)
 // S.C = 0(1)
              // Approach
@@ -57,8 +80,7 @@ public:
         return total;
     }
 };
-//-----------------------------------------------------------------
-//           Brute force approach
+//----------- Brute force approach--------------
 // T.c = 0(n³)
 // S.C  = 0(1)
  
