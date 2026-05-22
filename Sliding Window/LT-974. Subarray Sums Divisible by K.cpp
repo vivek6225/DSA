@@ -1,17 +1,20 @@
 
-                  //optimal Approach
+//--------------optimal Approach----------------------
 //T.C= 0(n)
 //S.C = 0(n)
 
-  //. Steps:
-//     1.Keep running prefixSum.
-//     2.Compute rem = prefixSum % k (fix negative with rem += k).
-//    3.Use hashmap m to store remainder frequencies.
-//    4.Each time a remainder repeats → add m[rem] to count.
-//    5.Increment m[rem].
-// .Initialize m[0] = 1 to count subarrays starting from index 0.
+               // Steps:
+// 1. Keep a running prefixSum.
+// 2. Compute rem = prefixSum % k.
+//    If rem < 0, do rem += k to handle negatives.
+// 3. Use hashmap m to store frequency of remainders.
+// 4. If a remainder repeats, add m[rem] to count.
+// 5. Increment m[rem].
 
-Initialize m[0] = 1 to count subarrays starting from index 0.
+// Initialize m[0] = 1
+// to count subarrays starting from index 0.
+
+
 class Solution {
 public:
     int subarraysDivByK(vector<int>& nums, int k) {
@@ -43,8 +46,8 @@ public:
     }
 };
 
-//-----------------------------------------------------------------
-                        // Better Approach
+
+//------------------// Better Approach-------
 //T.C = 0(n²)
 //S.C = (1)
 
