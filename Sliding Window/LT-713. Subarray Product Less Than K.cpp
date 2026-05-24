@@ -1,43 +1,60 @@
 //----------------Optimal Approach---------------------------------
-//            Approach (Sliding Window):
-// 1.Keep a running product of elements in the current window [start...end].
-// 2Expand the window by moving end forward.
-// 3.If product ≥ k, shrink from the left by moving start until product < k.
-// 4.At each step, all subarrays ending at end and starting from start to end are valid.
-//      .That’s (end - start + 1) subarrays.
-// 5.Add that count to the result.
 
-//T.C = 0(n)
-//S.C = 0(1)
+                // # Approach
+// 1. Use two pointers `start` and `end` to maintain a sliding window.
+// 2. Keep a running product of elements inside the window.
+// 3. Expand the window by multiplying `nums[end]`.
+// 4. If product becomes greater than or equal to `k`, shrink the window from the left.
+// 5. For every valid window, add `(end - start + 1)` to the answer because all subarrays ending at `end` are valid.
+// 6. Continue until `end` reaches the end of the array.
+// Time Complexity  : O(n)
+// Space Complexity : O(1)
 
 class Solution {
 public:
     int numSubarrayProductLessThanK(vector<int>& nums, int k) {
+
+        // Edge case
+        if(k <= 1)
+            return 0;
+
         int n = nums.size();
-        int start = 0, end = 0;   // sliding window pointers
-        int count = 0;            // to store result
-        int product = 1;          // running product of current window
 
-        while (end < n) {
-            product *= nums[end];  // expand the window by including nums[end]
+        // Sliding window pointers
+        int start = 0;
+        int end = 0;
 
-            // If product becomes >= k, shrink window from the left
-            while (product >= k && start <= end) {
+        // Store count of valid subarrays
+        int count = 0;
+
+        // Store product of current window
+        int product = 1;
+
+        while(end < n) {
+
+            // Include current element in product
+            product *= nums[end];
+
+            // Shrink window if product becomes >= k
+            while(product >= k && start <= end) {
+
                 product /= nums[start];
+
                 start++;
             }
 
-            // All subarrays ending at 'end' and starting from [start...end]
-            // will have product < k
-            // Number of such subarrays = (end - start + 1)
+            // Count all valid subarrays
+            // ending at 'end'
             count += (end - start + 1);
 
-            end++; // move window forward
+            // Move window forward
+            end++;
         }
+
         return count;
     }
 };
-//----------------Brute Force Approach-----------------------------
+//----------------Better  Approach----------------------
 // T.C = 0(n²) 
 // S.C = 0(1)
 class Solution {
