@@ -1,45 +1,52 @@
-
 //T.C = 0(N)
 //S.C = 0(1)
 
 class Solution {
 public:
     int compress(vector<char>& chars) {
-        int n = chars.size();   
-        int indx = 0;  // Pointer to write compressed characters
+        int n = chars.size();
 
-        // Step 1️: Traverse the entire array
-        for (int i = 0; i < n; i++) {
-            char ch = chars[i];  // Store the current character
-            int count = 0;       // To count frequency of this character
+        // index tells us where to write the compressed result
+        int index = 0;
 
-            // Step 2️: Count consecutive occurrences of the same character
+        // i moves through the original array
+        for (int i = 0; i < n; ) {
+
+            // Store the current character
+            char ch = chars[i];
+
+            // Count how many times the character appears consecutively
+            int count = 0;
+
+            // Count the same consecutive characters
             while (i < n && chars[i] == ch) {
-                count++;   // Increase count
-                i++;       // Move to next character
+                count++;
+                i++;
             }
 
-            // Step 3️: Write the character once in the compressed array
-            chars[indx++] = ch;
+            // Write the character into the array
+            chars[index] = ch;
+            index++;
 
-            // Step 4️: If the character appeared more than once,
-            //           convert count to string and add each digit
+            // If character appears more than once,
+            // write its count after the character
             if (count > 1) {
-                string str = to_string(count);   // Convert number to string
-                for (char dig : str) {
-                    chars[indx++] = dig;        // Add each digit of count
+
+                // Convert count (integer) into string
+                // Example: 12 -> "12"
+                string s = to_string(count);
+
+                // Write each digit of count into chars
+                for (char c : s) {
+                    chars[index] = c;
+                    index++;
                 }
             }
-
-            // Step 5️: Decrement i because 'for' loop will increment it again
-            // (we already moved one extra step in the while loop)
-            i--;
         }
 
-        // Step 6️: Resize vector to contain only the compressed portion
-        chars.resize(indx);
-
-        // Step 7️: Return the new length after compression
-        return indx;
+        // Return the length of the compressed array
+        return index;
     }
 };
+
+
